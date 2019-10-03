@@ -1,0 +1,63 @@
+composer create-project laravel/laravel laravel6
+
+
+
+
+
+
+
+
+resources/js
+
+resources/sass
+
+make new file
+_custom.scss
+
+copy code into the file:
+body{
+    background: blue;
+}
+
+include file in app.scss as such:
+
+
+
+
+
+to install ckeditor5 in laravel 6
+
+
+with git bash at your project location:
+npm install --save @ckeditor/ckeditor5-build-classic
+
+CKEditor will then be available at 
+node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js
+
+edit /resources/js/app.js and append the line:
+
+require( '~@ckeditor/ckeditor5-build-classic' )
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+const ClassicEditor = require( '@ckeditor/ckeditor5-build-classic' );
+
+
+
+add 
+    <script>
+            ClassicEditor
+                    .create( document.querySelector( '#editor' ) )
+                    .then( editor => {
+                            console.log( editor );
+                    } )
+                    .catch( error => {
+                            console.error( error );
+                    } );
+
+
+    </script>
+
+to your blade template 
+
+
+source: https://laravelcollective.com/docs/6.0/html
+composer require laravelcollective/html
