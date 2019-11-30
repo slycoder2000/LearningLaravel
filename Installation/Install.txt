@@ -61,3 +61,91 @@ to your blade template
 
 source: https://laravelcollective.com/docs/6.0/html
 composer require laravelcollective/html
+
+
+
+installing ckeditor in Laravel 6 (2019 version)
+
+composer require unisharp/laravel-ckeditor
+
+open config/app.php  and place code in the providers array:
+Unisharp\Ckeditor\ServiceProvider::class,
+
+
+php artisan vendor:publish --tag=ckeditor
+
+
+
+add html code:
+<textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+
+
+then just before body close tag:
+<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replace( 'summary-ckeditor' );
+</script>
+
+
+
+or if you want to upload and insert images:
+
+<script>
+    CKEDITOR.replace( 'summary-ckeditor', {
+        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });
+</script>
+
+
+define route and controller methods:
+
+Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
+
+a symlink to storage can be created with:
+php artisan storage:link
+
+create a CKEditorController controller and define upload method:
+
+<?php
+ 
+namespace App\Http\Controllers;
+ 
+use Illuminate\Http\Request;
+ 
+class CKEditorController extends Controller
+{
+    public function upload(Request $request)
+    {
+        if($request->hasFile('upload')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+      
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+      
+            //get file extension
+            $extension = $request->file('upload')->getClientOriginalExtension();
+      
+            //filename to store
+            $filenametostore = $filename.'_'.time().'.'.$extension;
+      
+            //Upload File
+            $request->file('upload')->storeAs('public/uploads', $filenametostore);
+ 
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('storage/uploads/'.$filenametostore); 
+            $msg = 'Image successfully uploaded'; 
+            $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+             
+            // Render HTML output 
+            @header('Content-type: text/html; charset=utf-8'); 
+            echo $re;
+        }
+    }
+}
+
+
+
+
+source: https://artisansweb.net/install-use-ckeditor-laravel/

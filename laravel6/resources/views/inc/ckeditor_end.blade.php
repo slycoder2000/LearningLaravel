@@ -1,3 +1,4 @@
+
 <script>
     ClassicEditor
             .create( document.querySelector( '#editor' ) )

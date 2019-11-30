@@ -32,7 +32,7 @@ const app = new Vue({
 });
 
 
-//require( '@ckeditor/ckeditor5-build-classic' )
-//import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+require( '~@ckeditor/ckeditor5-build-classic' )
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const ClassicEditor = require( '@ckeditor/ckeditor5-build-classic' );
 //@import '~bootstrap/scss/bootstrap';

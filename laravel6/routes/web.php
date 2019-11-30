@@ -38,3 +38,6 @@ Route::get('/users/{id}/{name}', function ($id,$name) {
 Route::get('/about', function(){
     return view('pages.about');
 });*/
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index');

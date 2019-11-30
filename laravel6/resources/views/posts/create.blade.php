@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('inc.ckeditor_start')
+<!-- @include('inc.ckeditor_start') -->
 
 <h1>Create Post</h1>
 
@@ -21,5 +21,5 @@
     {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
 {!! Form::close() !!}
 
-@include('inc.ckeditor_end')
+<!-- @include('inc.ckeditor_end') -->
 @endsection
