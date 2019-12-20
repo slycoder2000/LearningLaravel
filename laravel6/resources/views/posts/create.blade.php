@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- @include('inc.ckeditor_start') -->
+{{-- @include('inc.ckeditor_start') --}}
 
 <h1>Create Post</h1>
 
@@ -15,11 +15,12 @@
 
     <div class="form-group">
         {{Form::label('body', 'Body')}}
-        {{Form::textarea('body', '', ['id'=>'editor', 'class' => 'form-control', 'placeholder'=>'Body Text'])}}
+        {{Form::textarea('body', '', ['id'=>'editor1', 'class' => 'form-control', 'placeholder'=>'Body Text'])}}
 
     </div>
     {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
 {!! Form::close() !!}
 
-<!-- @include('inc.ckeditor_end') -->
+
+
 @endsection

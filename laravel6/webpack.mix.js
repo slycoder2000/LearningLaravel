@@ -16,3 +16,8 @@ mix.js('resources/js/app.js', 'public/js')
 
 //   .js('node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js', 'public/js')
 //mix.js('node_modules/@ckeditor/ckeditor5-build-classic/ckeditor.js', 'public/js');
+
+mix.scripts([
+   'public/js/popper.js',
+   'public/js/ckeditor.js'
+], 'public/js/all.js');
